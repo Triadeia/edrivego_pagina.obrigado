@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Pagamento confirmado — e-Drive</title>
+  <meta name="description" content="Pagamento confirmado. Siga as instruções nesta página para concluir seu cadastro na e-Drive." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --background: #0C0C0C;
+      --surface-2: #141414;
+      --ink: #FFFFFF;
+      --ink-muted: #888888;
+      --hairline: rgba(255, 255, 255, 0.08);
+      --gain: #00E676;
+      --loss: #F04438;
+      --brand: #4B0081;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--background);
+      color: var(--ink);
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
+
+    .container { max-width: 640px; margin: 0 auto; padding: 0 20px; }
+
+    /* Banner fixo de urgência */
+    .banner {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--loss);
+      color: #fff;
+      text-align: center;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+    .logo .e { color: var(--gain); }
+
+    /* Hero */
+    .hero { text-align: center; padding: 48px 0 32px; }
+    .check {
+      width: 72px; height: 72px;
+      margin: 0 auto 24px;
+      border-radius: 50%;
+      background: rgba(0, 230, 118, 0.1);
+      border: 2px solid var(--gain);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .check svg { width: 36px; height: 36px; }
+    .hero h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 12px; }
+    .hero p { color: var(--ink-muted); font-size: 1rem; }
+    .hero .highlight { color: var(--gain); font-weight: 600; }
+
+    /* Card de aviso */
+    .warning-card {
+      background: rgba(240, 68, 56, 0.06);
+      border: 1px solid rgba(240, 68, 56, 0.35);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 8px 0 32px;
+    }
+    .warning-card h2 {
+      color: var(--loss);
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 8px;
+    }
+    .warning-card p { font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+
+    /* Seções */
+    section { padding: 24px 0; }
+    .eyebrow {
+      color: var(--gain);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    section h2.title { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
+    section p.sub { color: var(--ink-muted); font-size: 0.95rem; margin-bottom: 24px; }
+
+    /* Vídeo */
+    .video-wrap {
+      background: var(--surface-2);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .video-wrap video { width: 100%; display: block; }
+    .video-placeholder {
+      aspect-ratio: 16 / 9;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 12px;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+    .video-placeholder .play {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid var(--gain);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Passo a passo */
+    .step {
+      display: flex; flex-direction: column;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--hairline);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .step-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(0, 230, 118, 0.1);
+      border: 1px solid var(--gain);
+      color: var(--gain);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; padding-top: 3px; }
+    .step p { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 12px; }
+    .step img {
+      width: 100%;
+      max-width: 320px;
+      align-self: center;
+      border-radius: 12px;
+      border: 1px solid var(--hairline);
+      display: block;
+    }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 32px 0 16px; }
+    .cta {
+      display: inline-block;
+      width: 100%;
+      background: var(--gain);
+      color: #0C0C0C;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 12px;
+      transition: opacity 0.15s;
+    }
+    .cta:hover { opacity: 0.9; }
+    .cta-note { color: var(--ink-muted); font-size: 0.8rem; margin-top: 12px; }
+
+    footer {
+      border-top: 1px solid var(--hairline);
+      padding: 24px 0;
+      margin-top: 40px;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: 0.8rem;
+    }
+
+    @media (min-width: 640px) {
+      .hero h1 { font-size: 2.25rem; }
+      .cta { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="banner">⚠️ NÃO FECHE ESTA PÁGINA — leia as instruções abaixo até o fim</div>
+
+  <header>
+    <div class="container">
+      <div class="logo"><span class="e">e-</span>Drive</div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <div class="hero">
+      <div class="check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h1>Pagamento confirmado!</h1>
+      <p>Obrigado pela confiança. <span class="highlight">Falta só um passo</span> para concluir seu cadastro na e-Drive.</p>
+    </div>
+
+    <div class="warning-card">
+      <h2>⚠️ Importante: não saia desta página</h2>
+      <p>Para garantir sua vaga, você precisa preencher o formulário de cadastro <strong>agora</strong>. Abaixo explicamos exatamente o que vai acontecer e como preencher, passo a passo. Leva menos de 5 minutos.</p>
+    </div>
+
+    <!-- VÍDEO (WebM) — ativar quando o arquivo estiver disponível: colocar video.webm na raiz e trocar data-enabled para "true" -->
+    <section id="video-section" data-enabled="false">
+      <div class="eyebrow">Assista primeiro</div>
+      <h2 class="title">O que acontece agora</h2>
+      <p class="sub">Neste vídeo rápido, explicamos os próximos passos.</p>
+      <div class="video-wrap">
+        <div class="video-placeholder" id="video-placeholder">
+          <div class="play">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#00E676"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+          </div>
+          <span>Vídeo explicativo em instantes</span>
+        </div>
+        <video id="explain-video" controls playsinline preload="metadata" style="display:none">
+          <source src="video.webm" type="video/webm" />
+          Seu navegador não suporta vídeo.
+        </video>
+      </div>
+    </section>
+
+    <section id="passo-a-passo">
+      <div class="eyebrow">Passo a passo</div>
+      <h2 class="title">Como preencher o formulário</h2>
+      <p class="sub">Siga as etapas abaixo no seu celular. Cada imagem mostra exatamente a tela que você vai ver.</p>
+
+      <div id="steps">
+        <!-- STEPS_PLACEHOLDER: prints das etapas do forms serão inseridos aqui -->
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">1</div>
+            <h3>Toque no botão verde abaixo</h3>
+          </div>
+          <p>Você será levado ao formulário oficial de cadastro da e-Drive.</p>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">2</div>
+            <h3>Preencha todas as etapas</h3>
+          </div>
+          <p>Responda com atenção — usamos essas informações para liberar seu acesso.</p>
+        </div>
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">3</div>
+            <h3>Envie e aguarde a confirmação</h3>
+          </div>
+          <p>Após enviar, nossa equipe entra em contato com você pelo WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-section">
+      <a class="cta" id="cta-forms" href="#" rel="noopener">PREENCHER FORMULÁRIO AGORA →</a>
+      <p class="cta-note">Leva menos de 5 minutos • Seus dados estão seguros</p>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="logo" style="font-size:1rem; margin-bottom:8px;"><span class="e">e-</span>Drive</div>
+      © <span id="year"></span> e-Drive. Todos os direitos reservados.
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // FORMS_URL: definir quando o link do formulário chegar
+    var FORMS_URL = "";
+
+    // Propaga UTM da URL atual para o link do formulário
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var utm = new URLSearchParams();
+      params.forEach(function (v, k) {
+        if (k.indexOf('utm_') === 0) utm.append(k, v);
+      });
+      var cta = document.getElementById('cta-forms');
+      if (FORMS_URL) {
+        var sep = FORMS_URL.indexOf('?') > -1 ? '&' : '?';
+        cta.href = utm.toString() ? FORMS_URL + sep + utm.toString() : FORMS_URL;
+      }
+    })();
+
+    // Ativa o vídeo quando data-enabled="true"
+    (function () {
+      var section = document.getElementById('video-section');
+      if (section.getAttribute('data-enabled') === 'true') {
+        document.getElementById('video-placeholder').style.display = 'none';
+        document.getElementById('explain-video').style.display = 'block';
+      }
+    })();
+  </script>
+</body>
+</html>
