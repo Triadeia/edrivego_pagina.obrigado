@@ -152,11 +152,21 @@
     .step p { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 12px; }
     .step img {
       width: 100%;
-      max-width: 320px;
+      max-width: 340px;
       align-self: center;
       border-radius: 12px;
       border: 1px solid var(--hairline);
       display: block;
+      background: #fff;
+    }
+    .step-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .step-grid img { max-width: 100%; }
+    @media (max-width: 400px) {
+      .step-grid { grid-template-columns: 1fr; }
     }
 
     /* CTA */
@@ -211,12 +221,12 @@
         </svg>
       </div>
       <h1>Pagamento confirmado!</h1>
-      <p>Obrigado pela confiança. <span class="highlight">Falta só um passo</span> para concluir seu cadastro na e-Drive.</p>
+      <p>Obrigado pela confiança. <span class="highlight">Falta só um passo</span> para concluir sua adesão à e-Drive Go.</p>
     </div>
 
     <div class="warning-card">
       <h2>⚠️ Importante: não saia desta página</h2>
-      <p>Para garantir sua vaga, você precisa preencher o formulário de cadastro <strong>agora</strong>. Abaixo explicamos exatamente o que vai acontecer e como preencher, passo a passo. Leva menos de 5 minutos.</p>
+      <p>Agora você precisa <strong>enviar seus documentos</strong> pelo formulário oficial. Abaixo explicamos exatamente o que vai acontecer e como preencher, passo a passo. Leva menos de 5 minutos e garante a análise da sua adesão.</p>
     </div>
 
     <!-- VÍDEO (WebM) — ativar quando o arquivo estiver disponível: colocar video.webm na raiz e trocar data-enabled para "true" -->
@@ -241,30 +251,75 @@
     <section id="passo-a-passo">
       <div class="eyebrow">Passo a passo</div>
       <h2 class="title">Como preencher o formulário</h2>
-      <p class="sub">Siga as etapas abaixo no seu celular. Cada imagem mostra exatamente a tela que você vai ver.</p>
+      <p class="sub">Siga as etapas abaixo no seu celular. Cada imagem mostra exatamente a tela que você vai ver no formulário.</p>
 
       <div id="steps">
-        <!-- STEPS_PLACEHOLDER: prints das etapas do forms serão inseridos aqui -->
         <div class="step">
           <div class="step-head">
             <div class="step-num">1</div>
-            <h3>Toque no botão verde abaixo</h3>
+            <h3>Preencha seus dados pessoais</h3>
           </div>
-          <p>Você será levado ao formulário oficial de cadastro da e-Drive.</p>
+          <p>Informe <strong>Nome completo</strong>, <strong>CPF</strong>, <strong>e-mail</strong> e <strong>número de telefone</strong> (WhatsApp). Confira tudo antes de continuar.</p>
+          <div class="step-grid">
+            <img src="assets/form/01-nome.png" alt="Campo Nome" loading="lazy" />
+            <img src="assets/form/02-cpf.png" alt="Campo CPF" loading="lazy" />
+            <img src="assets/form/03-email.png" alt="Campo E-mail" loading="lazy" />
+            <img src="assets/form/04-telefone.png" alt="Campo Telefone" loading="lazy" />
+          </div>
         </div>
+
         <div class="step">
           <div class="step-head">
             <div class="step-num">2</div>
-            <h3>Preencha todas as etapas</h3>
+            <h3>Envie a CNH (frente) com EAR</h3>
           </div>
-          <p>Responda com atenção — usamos essas informações para liberar seu acesso.</p>
+          <p>Foto ou PDF da <strong>frente da sua CNH</strong>. Ela precisa ter a observação <strong>EAR</strong> (Exerce Atividade Remunerada). Toque em “Adicionar arquivo”.</p>
+          <img src="assets/form/05-cnh-frente.png" alt="Upload CNH frente" loading="lazy" />
         </div>
+
         <div class="step">
           <div class="step-head">
             <div class="step-num">3</div>
-            <h3>Envie e aguarde a confirmação</h3>
+            <h3>Envie a CNH (verso)</h3>
           </div>
-          <p>Após enviar, nossa equipe entra em contato com você pelo WhatsApp.</p>
+          <p>Agora o <strong>verso da CNH</strong>. Garanta que a imagem esteja legível, sem cortes e sem reflexo.</p>
+          <img src="assets/form/06-cnh-verso.png" alt="Upload CNH verso" loading="lazy" />
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">4</div>
+            <h3>Comprovante de residência</h3>
+          </div>
+          <p>Conta de luz, água, telefone ou internet <strong>recente</strong> no seu nome. Foto nítida ou PDF.</p>
+          <img src="assets/form/07-comprovante.png" alt="Upload comprovante de residência" loading="lazy" />
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">5</div>
+            <h3>Certidão de antecedentes criminais</h3>
+          </div>
+          <p>Emita gratuitamente no site da Polícia Federal e envie o <strong>PDF</strong> aqui.</p>
+          <img src="assets/form/08-antecedentes.png" alt="Upload certidão de antecedentes" loading="lazy" />
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">6</div>
+            <h3>Nota de avaliação das plataformas</h3>
+          </div>
+          <p>Print da sua <strong>nota como motorista</strong> (Uber, 99 etc.). Mostra seu histórico de qualidade.</p>
+          <img src="assets/form/09-nota.png" alt="Upload nota de avaliação" loading="lazy" />
+        </div>
+
+        <div class="step">
+          <div class="step-head">
+            <div class="step-num">7</div>
+            <h3>Toque em “Enviar”</h3>
+          </div>
+          <p>Confira tudo e finalize. Após o envio, <strong>nossa equipe confere seus documentos e entra em contato pelo WhatsApp</strong> com as próximas etapas.</p>
+          <img src="assets/form/10-enviar.png" alt="Botão Enviar" loading="lazy" style="max-width:200px" />
         </div>
       </div>
     </section>
@@ -286,8 +341,8 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // FORMS_URL: definir quando o link do formulário chegar
-    var FORMS_URL = "";
+    // FORMS_URL: formulário oficial de envio de documentos (adesão e-Drive Go)
+    var FORMS_URL = "https://forms.gle/vrQ4ZcxREnVkpH246";
 
     // Propaga UTM da URL atual para o link do formulário
     (function () {
