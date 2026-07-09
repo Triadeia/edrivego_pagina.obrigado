@@ -102,16 +102,18 @@
     section h2.title { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
     section p.sub { color: var(--ink-muted); font-size: 0.95rem; margin-bottom: 24px; }
 
-    /* Vídeo */
+    /* Vídeo (vertical 9:16, otimizado mobile) */
     .video-wrap {
       background: var(--surface-2);
       border: 1px solid var(--hairline);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
+      max-width: 320px;
+      margin: 0 auto;
     }
-    .video-wrap video { width: 100%; display: block; }
+    .video-wrap video { width: 100%; display: block; aspect-ratio: 9 / 16; object-fit: cover; background: #000; }
     .video-placeholder {
-      aspect-ratio: 16 / 9;
+      aspect-ratio: 9 / 16;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       gap: 12px;
@@ -229,8 +231,8 @@
       <p>Para concluir sua adesão, você precisa <strong>enviar seus documentos</strong> pelo formulário oficial, aqui mesmo. Preparamos um passo a passo simples abaixo. Leva menos de 5 minutos e garante que sua análise comece <strong>hoje</strong>.</p>
     </div>
 
-    <!-- VÍDEO (WebM) — ativar quando o arquivo estiver disponível: colocar video.webm na raiz e trocar data-enabled para "true" -->
-    <section id="video-section" data-enabled="false">
+    <!-- VÍDEO (WebM vertical, otimizado mobile) -->
+    <section id="video-section" data-enabled="true">
       <div class="eyebrow">Comece por aqui</div>
       <h2 class="title">Uma mensagem para você</h2>
       <p class="sub">Aperte o play — em poucos segundos explicamos o que vem agora.</p>
@@ -241,7 +243,7 @@
           </div>
           <span>Sua mensagem de boas-vindas em instantes</span>
         </div>
-        <video id="explain-video" controls playsinline preload="metadata" style="display:none">
+        <video id="explain-video" controls playsinline preload="metadata" poster="video-poster.jpg" style="display:none">
           <source src="video.webm" type="video/webm" />
           Seu navegador não suporta vídeo.
         </video>
