@@ -274,9 +274,9 @@
       <p>Seu pagamento foi confirmado. <span class="highlight">Seja muito bem-vindo(a)</span> — você acaba de dar o primeiro passo rumo à sua virada elétrica. 💚</p>
     </div>
 
-    <div class="warning-card">
-      <h2>⚠️ Só falta 1 passo — não saia desta página</h2>
-      <p>Para concluir sua adesão, você precisa <strong>enviar seus documentos</strong> pelo formulário oficial. Leva menos de 5 minutos e garante que sua análise comece <strong>hoje</strong>.</p>
+    <div class="cta-section" style="padding-top:0;">
+      <a class="cta urgent" id="cta-forms-top" href="#" rel="noopener">PREENCHER FORMULÁRIO →</a>
+      <p class="cta-note">Leva menos de 5 minutos • Seus dados estão seguros</p>
     </div>
 
     <!-- VÍDEO (WebM vertical, otimizado mobile) -->
@@ -325,10 +325,11 @@
       params.forEach(function (v, k) {
         if (k.indexOf('utm_') === 0) utm.append(k, v);
       });
-      var cta = document.getElementById('cta-forms');
+      var ctas = document.querySelectorAll('#cta-forms, #cta-forms-top');
       if (FORMS_URL) {
         var sep = FORMS_URL.indexOf('?') > -1 ? '&' : '?';
-        cta.href = utm.toString() ? FORMS_URL + sep + utm.toString() : FORMS_URL;
+        var href = utm.toString() ? FORMS_URL + sep + utm.toString() : FORMS_URL;
+        ctas.forEach(function (cta) { cta.href = href; });
       }
     })();
 
