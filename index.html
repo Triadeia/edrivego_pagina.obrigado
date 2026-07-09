@@ -8,17 +8,20 @@
   <meta name="description" content="Pagamento confirmado. Siga as instruções nesta página para concluir seu cadastro na e-Drive." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=Archivo+Black&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --background: #0C0C0C;
-      --surface-2: #141414;
-      --ink: #FFFFFF;
-      --ink-muted: #9a9a9a;
-      --hairline: rgba(255, 255, 255, 0.08);
-      --gain: #00E676;
+      --background: #0A0812;
+      --surface-2: #110C1E;
+      --ink: #F6F4FA;
+      --ink-muted: #B9A8D6;
+      --hairline: rgba(255, 255, 255, 0.10);
+      --gain: #2EE6A8;
+      --on-gain: #05110C;
+      --mint-light: #8DFFF0;
       --loss: #F04438;
       --brand: #4B0081;
+      --lilac: #C9A8F0;
       /* Liquid glass */
       --glass-bg: rgba(255, 255, 255, 0.055);
       --glass-border: rgba(255, 255, 255, 0.14);
@@ -31,7 +34,7 @@
     body {
       background: var(--background);
       color: var(--ink);
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Archivo', system-ui, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       position: relative;
@@ -50,7 +53,7 @@
     body::before {
       width: 60vw; height: 60vw; max-width: 520px; max-height: 520px;
       top: -12%; left: -18%;
-      background: radial-gradient(circle at 30% 30%, rgba(0, 230, 118, 0.55), transparent 68%);
+      background: radial-gradient(circle at 30% 30%, rgba(46, 230, 168, 0.55), transparent 68%);
       animation: floatA 18s ease-in-out infinite;
     }
     body::after {
@@ -65,12 +68,12 @@
       left: 50%; top: 46%; transform: translate(-50%, -50%);
       width: 70vw; height: 70vw; max-width: 620px; max-height: 620px;
       border-radius: 50%; filter: blur(110px); opacity: 0.28;
-      background: radial-gradient(circle, rgba(0, 230, 118, 0.35), transparent 65%);
+      background: radial-gradient(circle, rgba(46, 230, 168, 0.35), transparent 65%);
       animation: floatA 26s ease-in-out infinite reverse;
     }
     /* Véu escuro por cima dos blobs pra manter contraste do texto */
     .veil { position: fixed; inset: 0; z-index: -1; pointer-events: none;
-      background: radial-gradient(circle at 50% 0%, rgba(12,12,12,0.30), rgba(12,12,12,0.72) 60%, rgba(12,12,12,0.88)); }
+      background: radial-gradient(circle at 50% 0%, rgba(10,8,18,0.25), rgba(10,8,18,0.68) 58%, rgba(10,8,18,0.86)); }
     @keyframes floatA {
       0%, 100% { transform: translate(0, 0) scale(1); }
       50% { transform: translate(6%, 8%) scale(1.12); }
@@ -82,7 +85,7 @@
     @media (prefers-reduced-motion: reduce) {
       body::before, body::after, .glow-mid { animation: none; }
     }
-    h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
+    h1, h2, h3 { font-family: 'Archivo Black', Archivo, sans-serif; letter-spacing: -0.02em; }
 
     .container { max-width: 640px; margin: 0 auto; padding: 0 20px; }
 
@@ -108,7 +111,7 @@
       border-bottom: 1px solid var(--hairline);
     }
     .logo {
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Archivo Black', Archivo, sans-serif;
       font-weight: 800;
       font-size: 1.25rem;
       text-align: center;
@@ -121,11 +124,11 @@
       width: 76px; height: 76px;
       margin: 0 auto 24px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, rgba(0, 230, 118, 0.35), rgba(0, 230, 118, 0.08));
+      background: radial-gradient(circle at 35% 30%, rgba(46, 230, 168, 0.35), rgba(46, 230, 168, 0.08));
       -webkit-backdrop-filter: var(--glass-blur);
       backdrop-filter: var(--glass-blur);
-      border: 1.5px solid rgba(0, 230, 118, 0.7);
-      box-shadow: var(--glass-highlight), 0 0 30px rgba(0, 230, 118, 0.28);
+      border: 1.5px solid rgba(46, 230, 168, 0.7);
+      box-shadow: var(--glass-highlight), 0 0 30px rgba(46, 230, 168, 0.28);
       display: flex; align-items: center; justify-content: center;
     }
     .check svg { width: 36px; height: 36px; }
@@ -192,7 +195,7 @@
     .video-placeholder .play {
       width: 56px; height: 56px;
       border-radius: 50%;
-      background: rgba(0, 230, 118, 0.1);
+      background: rgba(46, 230, 168, 0.1);
       border: 1px solid var(--gain);
       display: flex; align-items: center; justify-content: center;
     }
@@ -214,14 +217,14 @@
       flex-shrink: 0;
       width: 34px; height: 34px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, rgba(0, 230, 118, 0.4), rgba(0, 230, 118, 0.1));
-      border: 1px solid rgba(0, 230, 118, 0.65);
+      background: radial-gradient(circle at 35% 30%, rgba(46, 230, 168, 0.4), rgba(46, 230, 168, 0.1));
+      border: 1px solid rgba(46, 230, 168, 0.65);
       color: #d6ffe9;
-      font-family: 'Montserrat', sans-serif;
+      font-family: 'Archivo Black', Archivo, sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: var(--glass-highlight), 0 0 16px rgba(0, 230, 118, 0.25);
+      box-shadow: var(--glass-highlight), 0 0 16px rgba(46, 230, 168, 0.25);
     }
     .step h3 { font-size: 1.05rem; font-weight: 700; padding-top: 3px; }
     .step p { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 12px; }
@@ -249,21 +252,21 @@
     .cta {
       display: inline-block;
       width: 100%;
-      background: linear-gradient(135deg, rgba(0, 230, 118, 0.92), rgba(0, 200, 100, 0.82));
+      background: linear-gradient(135deg, rgba(46, 230, 168, 0.92), rgba(0, 200, 140, 0.82));
       -webkit-backdrop-filter: var(--glass-blur);
       backdrop-filter: var(--glass-blur);
-      color: #06210f;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
+      color: #05110C;
+      font-family: 'Archivo', sans-serif;
+      font-weight: 900;
       font-size: 1.05rem;
       text-decoration: none;
-      padding: 17px 32px;
-      border-radius: 16px;
+      padding: 18px 32px;
+      border-radius: 999px;
       border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: var(--glass-highlight), 0 8px 28px rgba(0, 230, 118, 0.32);
+      box-shadow: var(--glass-highlight), 0 16px 44px rgba(46, 230, 168, 0.32);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .cta:hover { transform: translateY(-2px); box-shadow: var(--glass-highlight), 0 12px 34px rgba(0, 230, 118, 0.45); }
+    .cta:hover { transform: translateY(-2px); box-shadow: var(--glass-highlight), 0 12px 34px rgba(46, 230, 168, 0.45); }
     .cta-note { color: var(--ink-muted); font-size: 0.8rem; margin-top: 12px; }
 
     footer {
@@ -298,7 +301,7 @@
 
     <div class="hero">
       <div class="check">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#00E676" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2EE6A8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="20 6 9 17 4 12"></polyline>
         </svg>
       </div>
@@ -319,7 +322,7 @@
       <div class="video-wrap">
         <div class="video-placeholder" id="video-placeholder">
           <div class="play">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#00E676"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#2EE6A8"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
           </div>
           <span>Sua mensagem de boas-vindas em instantes</span>
         </div>
