@@ -14,11 +14,17 @@
       --background: #0C0C0C;
       --surface-2: #141414;
       --ink: #FFFFFF;
-      --ink-muted: #888888;
+      --ink-muted: #9a9a9a;
       --hairline: rgba(255, 255, 255, 0.08);
       --gain: #00E676;
       --loss: #F04438;
       --brand: #4B0081;
+      /* Liquid glass */
+      --glass-bg: rgba(255, 255, 255, 0.055);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --glass-blur: blur(18px) saturate(160%);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.38);
+      --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.22);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -28,20 +34,72 @@
       font-family: 'Inter', system-ui, sans-serif;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* Blobs de gradiente que o vidro refrata */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      z-index: -2;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    body::before {
+      width: 60vw; height: 60vw; max-width: 520px; max-height: 520px;
+      top: -12%; left: -18%;
+      background: radial-gradient(circle at 30% 30%, rgba(0, 230, 118, 0.55), transparent 68%);
+      animation: floatA 18s ease-in-out infinite;
+    }
+    body::after {
+      width: 66vw; height: 66vw; max-width: 560px; max-height: 560px;
+      bottom: -14%; right: -20%;
+      background: radial-gradient(circle at 60% 60%, rgba(75, 0, 129, 0.75), rgba(120, 40, 200, 0.35) 45%, transparent 70%);
+      animation: floatB 22s ease-in-out infinite;
+    }
+    /* Segundo par de brilhos, no meio da página */
+    .glow-mid {
+      position: fixed; z-index: -2; pointer-events: none;
+      left: 50%; top: 46%; transform: translate(-50%, -50%);
+      width: 70vw; height: 70vw; max-width: 620px; max-height: 620px;
+      border-radius: 50%; filter: blur(110px); opacity: 0.28;
+      background: radial-gradient(circle, rgba(0, 230, 118, 0.35), transparent 65%);
+      animation: floatA 26s ease-in-out infinite reverse;
+    }
+    /* Véu escuro por cima dos blobs pra manter contraste do texto */
+    .veil { position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, rgba(12,12,12,0.30), rgba(12,12,12,0.72) 60%, rgba(12,12,12,0.88)); }
+    @keyframes floatA {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(6%, 8%) scale(1.12); }
+    }
+    @keyframes floatB {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-7%, -6%) scale(1.1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body::before, body::after, .glow-mid { animation: none; }
     }
     h1, h2, h3 { font-family: 'Montserrat', sans-serif; letter-spacing: -0.02em; }
 
     .container { max-width: 640px; margin: 0 auto; padding: 0 20px; }
 
-    /* Banner fixo de urgência */
+    /* Banner fixo de urgência — vidro âmbar/vermelho */
     .banner {
       position: sticky; top: 0; z-index: 50;
-      background: var(--loss);
+      background: rgba(240, 68, 56, 0.28);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: var(--glass-highlight), 0 4px 20px rgba(0,0,0,0.3);
       color: #fff;
       text-align: center;
-      padding: 10px 16px;
+      padding: 11px 16px;
       font-weight: 600;
       font-size: 0.875rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.35);
     }
 
     /* Header */
@@ -60,11 +118,14 @@
     /* Hero */
     .hero { text-align: center; padding: 48px 0 32px; }
     .check {
-      width: 72px; height: 72px;
+      width: 76px; height: 76px;
       margin: 0 auto 24px;
       border-radius: 50%;
-      background: rgba(0, 230, 118, 0.1);
-      border: 2px solid var(--gain);
+      background: radial-gradient(circle at 35% 30%, rgba(0, 230, 118, 0.35), rgba(0, 230, 118, 0.08));
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1.5px solid rgba(0, 230, 118, 0.7);
+      box-shadow: var(--glass-highlight), 0 0 30px rgba(0, 230, 118, 0.28);
       display: flex; align-items: center; justify-content: center;
     }
     .check svg { width: 36px; height: 36px; }
@@ -72,13 +133,16 @@
     .hero p { color: var(--ink-muted); font-size: 1rem; }
     .hero .highlight { color: var(--gain); font-weight: 600; }
 
-    /* Card de aviso */
+    /* Card de aviso — vidro com leve tom vermelho */
     .warning-card {
-      background: rgba(240, 68, 56, 0.06);
-      border: 1px solid rgba(240, 68, 56, 0.35);
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(240, 68, 56, 0.16), rgba(255, 255, 255, 0.04));
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid rgba(240, 68, 56, 0.38);
+      border-radius: 18px;
       padding: 20px;
       margin: 8px 0 32px;
+      box-shadow: var(--glass-highlight), var(--glass-shadow);
     }
     .warning-card h2 {
       color: var(--loss);
@@ -104,13 +168,18 @@
 
     /* Vídeo (vertical 9:16, otimizado mobile) */
     .video-wrap {
-      background: var(--surface-2);
-      border: 1px solid var(--hairline);
-      border-radius: 16px;
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 22px;
       overflow: hidden;
       max-width: 320px;
       margin: 0 auto;
+      padding: 8px;
+      box-shadow: var(--glass-highlight), var(--glass-shadow);
     }
+    .video-wrap video { border-radius: 16px; }
     .video-wrap video { width: 100%; display: block; aspect-ratio: 9 / 16; object-fit: cover; background: #000; }
     .video-placeholder {
       aspect-ratio: 9 / 16;
@@ -131,24 +200,28 @@
     /* Passo a passo */
     .step {
       display: flex; flex-direction: column;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--hairline);
-      border-radius: 12px;
+      background: var(--glass-bg);
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-radius: 18px;
       padding: 20px;
       margin-bottom: 16px;
+      box-shadow: var(--glass-highlight), var(--glass-shadow);
     }
     .step-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
     .step-num {
       flex-shrink: 0;
-      width: 32px; height: 32px;
+      width: 34px; height: 34px;
       border-radius: 50%;
-      background: rgba(0, 230, 118, 0.1);
-      border: 1px solid var(--gain);
-      color: var(--gain);
+      background: radial-gradient(circle at 35% 30%, rgba(0, 230, 118, 0.4), rgba(0, 230, 118, 0.1));
+      border: 1px solid rgba(0, 230, 118, 0.65);
+      color: #d6ffe9;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.95rem;
       display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--glass-highlight), 0 0 16px rgba(0, 230, 118, 0.25);
     }
     .step h3 { font-size: 1.05rem; font-weight: 700; padding-top: 3px; }
     .step p { color: var(--ink-muted); font-size: 0.9rem; margin-bottom: 12px; }
@@ -176,17 +249,21 @@
     .cta {
       display: inline-block;
       width: 100%;
-      background: var(--gain);
-      color: #0C0C0C;
+      background: linear-gradient(135deg, rgba(0, 230, 118, 0.92), rgba(0, 200, 100, 0.82));
+      -webkit-backdrop-filter: var(--glass-blur);
+      backdrop-filter: var(--glass-blur);
+      color: #06210f;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 1.05rem;
       text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 12px;
-      transition: opacity 0.15s;
+      padding: 17px 32px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: var(--glass-highlight), 0 8px 28px rgba(0, 230, 118, 0.32);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .cta:hover { opacity: 0.9; }
+    .cta:hover { transform: translateY(-2px); box-shadow: var(--glass-highlight), 0 12px 34px rgba(0, 230, 118, 0.45); }
     .cta-note { color: var(--ink-muted); font-size: 0.8rem; margin-top: 12px; }
 
     footer {
@@ -205,6 +282,9 @@
   </style>
 </head>
 <body>
+
+  <div class="glow-mid" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
 
   <div class="banner">💚 OBRIGADO! Não feche esta página — falta 1 passo rápido para concluir</div>
 
